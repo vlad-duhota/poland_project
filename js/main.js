@@ -46,8 +46,15 @@ $(function () {
       },
     ],
   });
+  let toggle = false;
   $('#toggle-btn').click(function () {
     $('#toggle-example').slideToggle();
+    toggle=!toggle;
+    if(toggle){
+      $(this).text('Сховати');
+    } else{
+      $(this).text('Розгорнути');
+    }
   });
 });
 
@@ -55,6 +62,7 @@ $('#form').submit(function (e) {
   e.preventDefault();
   let first_name = $('#first_name').val();
   let phone = $('#phone').val();
+  let nik_telegram = $('#tg').val();
 
   $('.form__error').remove();
 
@@ -77,6 +85,13 @@ $('#form').submit(function (e) {
       '<span class="form__error">Введіть номер телефону</span>'
     );
   }
+
+  if (nik_telegram.length < 1) {
+    $('.form__label--tg').after(
+      '<span class="form__error">Введіть нік телеграм</span>'
+    );
+  }
+
 
   setTimeout(() => {
     $('.form__error').remove();
@@ -103,16 +118,3 @@ $inputItem.length &&
         });
   });
 
-var granimInstance = new Granim({
-  element: '#canvas-basic',
-  direction: 'left-right',
-  isPausedWhenNotInView: true,
-  states: {
-    'default-state': {
-      gradients: [
-        ['#0191f5', '#28bbc2'],
-        ['#f90', '#fee62e'],
-      ],
-    },
-  },
-});
