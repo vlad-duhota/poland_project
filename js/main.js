@@ -48,6 +48,7 @@ $(function () {
   });
   let toggle = false;
   $('#toggle-btn').click(function () {
+    $(this).toggleClass('active');
     $('#toggle-example').slideToggle();
     toggle=!toggle;
     if(toggle){
@@ -118,3 +119,20 @@ $inputItem.length &&
         });
   });
 
+  const smoothLinks = document.querySelectorAll('a[href^="#"]');
+  for (let smoothLink of smoothLinks) {
+      smoothLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          const id = smoothLink.getAttribute('href');
+  
+          document.querySelector(id).scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+          });
+      });
+  };
+
+  $('.faq li').click(function(){
+    $(this).find('p').slideToggle(300);
+    $(this).toggleClass('active');
+  });
